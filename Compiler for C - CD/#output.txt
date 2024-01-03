@@ -1,0 +1,76 @@
+
+
+								 PHASE 1: LEXICAL ANALYSIS 
+
+
+SYMBOL   DATATYPE   TYPE   LINE NUMBER 
+_______________________________________
+
+#include<stdio.h>		Header	0	
+#include<string.h>		Header	1	
+main	int	Function	3	
+x	int	Variable	4	
+1	CONST	Constant	4	
+f	float	Variable	5	
+a	int	Variable	6	
+3	CONST	Constant	6	
+5	CONST	Constant	8	
+if	N/A	Keyword		9	
+printf	N/A	Keyword		10	
+100	CONST	Constant	11	
+else	N/A	Keyword		16	
+
+
+								 PHASE 2: SYNTAX ANALYSIS 
+
+
+
+Inorder traversal of the Parse Tree is: 
+
+#include<stdio.h>, headers, #include<string.h>, program, x, declaration, 1, statements, f, declaration, NULL, statements, a, declaration, 3, statements, x, declaration, NULL, statements, a, =, x, *, 3, +, 5, statements, x, >, a, if, printf, statements, a, =, x, *, 3, +, 100, statements, x, >, a, if, printf, statements, a, =, x, *, 3, +, 100, if-else, else, x, =, a, *, 3, +, 100, if-else, else, x, =, a, *, 3, +, 100, main, 
+
+
+
+								 PHASE 3: SEMANTIC ANALYSIS 
+
+Semantic analysis completed with 1 errors
+	 - Line 8: Multiple declarations of "x" not allowed!
+
+
+							   PHASE 4: INTERMEDIATE CODE GENERATION 
+
+x = 1
+f = NULL
+a = 3
+x = NULL
+t0 = 3 + 5
+t1 = x * t0
+a = t1
+
+if (x > a) GOTO L0 else GOTO L1
+
+LABEL L0:
+t2 = 3 + 100
+t3 = x * t2
+a = t3
+
+if (x > a) GOTO L2 else GOTO L3
+
+LABEL L2:
+t4 = 3 + 100
+t5 = x * t4
+a = t5
+
+LABEL L3:
+t6 = 3 + 100
+t7 = a * t6
+x = t7
+GOTO next
+
+LABEL L1:
+t8 = 3 + 100
+t9 = a * t8
+x = t9
+GOTO next
+
+
